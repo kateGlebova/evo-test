@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %} Departments {% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1>Departments</h1>
+        </div>
+        <div class="row">
+            {% for department in departments %}
+            <div class="department col-md-2">
+                <div class="department_inner"> {{ department.name }}</div>
+            </div>
+        {% endfor %}
+        <div class="department col-md-2" id="add_department">
+            <div class="department_inner">
+                <span class="glyphicon glyphicon-plus"></span>
+            </div>
+        </div>
+        </div>
+        <div class="popup col-md-3 col-s-1" id="department_form">
+            <div class="popup_inner">
+                <h2>Add department: </h2>
+                {{ wtf.quick_form(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

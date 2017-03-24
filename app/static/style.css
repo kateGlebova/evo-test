@@ -1,0 +1,56 @@
+body {
+    color: #452319;
+    /*background-color: #9f6b5e;*/
+}
+
+.department {
+    height: 150px;
+    background-color: #2b2c3e;
+    color: #d7ddea;
+    border: 1px solid #d7ddea;
+    text-align: center;
+    position: relative;
+    transition: background-color 0.5s;
+}
+
+.department_inner {
+    height: 2em;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.department:hover {
+    background-color: #d7ddea;
+    color: #2b2c3e;
+}
+
+.popup {
+    position:absolute;
+    /*height: 300px;*/
+    /*width:40%;*/
+    height: 20em;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 9999;
+    background-color: white;
+    border: 1px solid #452319;
+    box-shadow: 3px 3px 3px #888888;
+    text-align: center;
+    display: none;
+}
+
+.popup_inner {
+    width: 90%;
+    margin: auto;
+}
+
+#department_form {
+    height: 275px;
+}
