@@ -1,13 +1,44 @@
 {% extends "bootstrap/base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
+{% macro modal(id, title, form, action='', form_template='quick_form.html') %}
+    <div class="modal fade" tabindex="-1" role="dialog" id="{{ id }}">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h2>{{ title }}</h2>
+                </div>
+                <div class="modal-body">
+                    {% if form_template == 'quick_form.html' %}
+                        {% include 'quick_form.html' %}
+                    {% else %}
+                        <form class="form" role="form" method="post" action={{ action }}>
+                            {% include form_template %}
+                        </form>
+                    {% endif %}
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+{% endmacro %}
+
 {% block styles %}
     {{ super() }}
-    <link rel="stylesheet"  href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 {% endblock %}
 
 {% block scripts %}
     {{ super() }}
     <script src="{{ url_for('static', filename='jquery-3.1.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $(".datepicker").datepicker();
+        })
+    </script>
 {% endblock %}

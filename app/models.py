@@ -25,7 +25,8 @@ class Vacancy(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     publishment_date = db.Column(db.Date, nullable=False)
-    closing_date = db.Column(db.Date, nullable=False)
+    closing_date = db.Column(db.Date)
+    is_open = db.Column(db.Boolean, nullable=False, default=True)
     employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'))
     department_id = db.Column(db.Integer, db.ForeignKey('departments.id'), nullable=False)
     position_id = db.Column(db.Integer, db.ForeignKey('positions.id'), nullable=False)

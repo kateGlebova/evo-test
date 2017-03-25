@@ -7,23 +7,28 @@
         <div class="page-header">
             <h1>Departments</h1>
         </div>
+        <div class="row position_btn_row text-center">
+            <a class="btn btn-default" href="{{ url_for('positions') }}">Positions</a>
+        </div>
         <div class="row">
-            {% for department in departments %}
             <div class="department col-md-2">
-                <div class="department_inner"> {{ department.name }}</div>
+                <button data-toggle="modal" data-target="#add_department">
+                    <div class="department_inner">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </div>
+                </button>
             </div>
-        {% endfor %}
-        <div class="department col-md-2" id="add_department">
-            <div class="department_inner">
-                <span class="glyphicon glyphicon-plus"></span>
-            </div>
+            {% for department in departments %}
+                <div class="department col-md-2">
+                    <a href="{{ url_for('department', department_id=department.id) }}">
+                        <div class="department_inner">
+                            {{ department.name }}
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
         </div>
-        </div>
-        <div class="popup col-md-3 col-s-1" id="department_form">
-            <div class="popup_inner">
-                <h2>Add department: </h2>
-                {{ wtf.quick_form(form) }}
-            </div>
-        </div>
+
+        {{ modal('add_department', 'Add department: ', form) }}
     </div>
 {% endblock %}

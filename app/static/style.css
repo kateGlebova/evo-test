@@ -10,8 +10,12 @@ body {
     border: 1px solid #d7ddea;
     text-align: center;
     position: relative;
-    transition: background-color 0.5s;
 }
+
+.department a {
+    color: #d7ddea;
+}
+
 
 .department_inner {
     height: 2em;
@@ -23,34 +27,44 @@ body {
     margin: auto;
 }
 
+.department button, .department a {
+    width: 100%;
+    height: 100%;
+    background-color: #2b2c3e;
+    color: #d7ddea;
+    border: none;
+    color: inherit;
+}
+
 .department:hover {
     background-color: #d7ddea;
     color: #2b2c3e;
 }
 
-.popup {
-    position:absolute;
-    /*height: 300px;*/
-    /*width:40%;*/
-    height: 20em;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    z-index: 9999;
-    background-color: white;
-    border: 1px solid #452319;
-    box-shadow: 3px 3px 3px #888888;
-    text-align: center;
-    display: none;
+.department button:hover {
+    color: #2b2c3e;
+    background-color: #d7ddea;
 }
 
-.popup_inner {
-    width: 90%;
-    margin: auto;
+a {
+    color: inherit;
 }
 
-#department_form {
-    height: 275px;
+a:hover {
+    text-decoration: none;
+    color: #2b2c3e;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.position_btn_row a {
+    background-color: #2b2c3e;
+    color: #d7ddea;
+}
+
+.btn {
+    background-color: #2b2c3e;
+    color: #d7ddea;
 }
