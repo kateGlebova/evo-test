@@ -8,8 +8,8 @@
     {{ form.surname(class="form-control") }}
 </div>
 <div class="form-group required">
-    {{ form.position.label(class="control-label") }}
-    {{ form.position(class="form-control") }}
+    {{ form.position_id.label(class="control-label") }}
+    {{ form.position_id(class="form-control") }}
 </div>
 <div class="form-group required">
     {{ form.email.label(class="control-label") }}
@@ -21,15 +21,15 @@
 </div>
 <div class="form-group required">
     {{ form.birth_date.label(class="control-label") }}
-    {{ form.birth_date(class="form-control") }}
+    {{ form.birth_date(class="form-control", value=date_to_str(form.birth_date.data).strip()) }}
 </div>
 <div class="form-group required">
-    {{ form.department.label(class="control-label") }}
-    {{ form.department(class="form-control") }}
+    {{ form.department_id.label(class="control-label") }}
+    {{ form.department_id(class="form-control") }}
 </div>
 <div class="form-group required">
     {{ form.start_date.label(class="control-label") }}
-    {{ form.start_date(class="form-control datepicker") }}
+    {{ form.start_date(class="form-control datepicker", value=date_to_str(form.start_date.data).strip()) }}
 </div>
 <div class="checkbox">
     <label>

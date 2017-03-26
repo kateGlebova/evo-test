@@ -1,0 +1,11 @@
+{{ vacancy_form.hidden_tag() }}
+<div class="form-group required">
+    {{ form.position_id.label(class="control-label") }}
+    {{ form.position_id(class="form-control") }}
+</div>
+<div class="form-group required">
+    {{ form.publishment_date.label(class="control-label") }}
+    {{ form.publishment_date(class="form-control datepicker", value=date_to_str(form.publishment_date.data).strip()) }}
+</div>
+{{ form.submit(class="btn btn-default") }}
+

@@ -24,6 +24,12 @@
     </div>
 {% endmacro %}
 
+{% macro date_to_str(date, format='%d/%m/%Y') %}
+    {% if date %}
+        {{ date.strftime(format) }}
+    {% endif %}
+{% endmacro %}
+
 {% block styles %}
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -38,7 +44,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
         $(function () {
-            $(".datepicker").datepicker();
+            $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
         })
     </script>
 {% endblock %}
