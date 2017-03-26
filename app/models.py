@@ -49,3 +49,11 @@ class Employee(db.Model):
     department_id = db.Column(db.Integer, db.ForeignKey('departments.id'), nullable=False)
     position_id = db.Column(db.Integer, db.ForeignKey('positions.id'), nullable=False)
     vacancy = db.relationship('Vacancy', uselist=False, back_populates='employee')
+    history = db.relationship('WorkHistory', back_ref='employee')
+
+
+class WorkHistory(db.Model):
+    __tablename__ = 'work_history'
+
+    employee_id = db.Column(db.Integer, db.ForeignKey('employees.id'), nullable=False)
+    position_id = db.Column(db.Integer, db.ForeignKey('positions.id'), nullable=False)

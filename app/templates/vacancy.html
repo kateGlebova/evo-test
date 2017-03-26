@@ -5,7 +5,11 @@
 {% block jumbotron_content %}
 
     <h1>{{ vacancy.position.name }}</h1>
-    <p> {{ vacancy.department.name }} </p>
+    <p> {{ vacancy.department.name }}
+        <button class="btn btn-default" data-toggle="modal" data-target="#update_vacancy">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+    </p>
 
 {% endblock %}
 
