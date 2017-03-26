@@ -1,38 +1,39 @@
-{% extends "base.html" %}
+{% extends "base/jumbotron.html" %}
 
 {% block title %} {{ vacancy.position.name }} {% endblock %}
 
-{% block content %}
-    <div class="jumbotron">
-        <div class="container">
-            <h1>{{ vacancy.position.name }}</h1>
-            <p> {{ vacancy.department.name }} </p>
-        </div>
-    </div>
-    <div class="container">
-        {{ modal(
+{% block jumbotron_content %}
+
+    <h1>{{ vacancy.position.name }}</h1>
+    <p> {{ vacancy.department.name }} </p>
+
+{% endblock %}
+
+{% block main_content %}
+
+    {{ modal(
             'add_employee',
             'Hire employee:',
             employee_form,
             action=url_for('employees', department_id=vacancy.department_id, vacancy_id=vacancy.id),
-            form_template='employee_form.html'
+            form_template='parts/employee_form.html'
         ) }}
 
-        {{ modal('update_vacancy', 'Update vacancy:', vacancy_form, form_template='vacancy_form.html') }}
+    {{ modal('update_vacancy', 'Update vacancy:', vacancy_form, form_template='parts/vacancy_form.html') }}
 
-        <h2>Published {{ vacancy.publishment_date }}</h2>
-        {% if vacancy.is_open %}
-            <button class="btn btn-default" data-toggle="modal" data-target="#add_employee">
-                Hire
-            </button>
-        {% else %}
-            <h3>Closed {{ vacancy.closing_date }}</h3>
-            {#            <h3>#}
-            {#                <a href="{{ url_for('employee', employee_id=vacancy.employee,id) }}">#}
-            {#                    {{ vacancy.employee.name }} {{ vacancy.employee.surname }}#}
-            {#                </a> #}
-            {#                hired#}
-            {#            </h3>#}
-        {% endif %}
-    </div>
+    <h2>Published {{ date_to_str(vacancy.publishment_date) }}</h2>
+    {% if vacancy.is_open %}
+        <button class="btn btn-default" data-toggle="modal" data-target="#add_employee">
+            Hire
+        </button>
+    {% else %}
+        <h3>Closed {{ date_to_str(vacancy.closing_date) }}</h3>
+        <h3>
+            <a href="{{ url_for('employee', department_id=vacancy.employee.department.id, employee_id=vacancy.employee.id) }}">
+                {{ vacancy.employee.name }} {{ vacancy.employee.surname }}
+            </a>
+            hired
+        </h3>
+    {% endif %}
+
 {% endblock %}

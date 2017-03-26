@@ -10,6 +10,7 @@ class Department(db.Model):
     vacancies = db.relationship('Vacancy', backref='department')
     employees = db.relationship('Employee', backref='department')
 
+
 class Position(db.Model):
     __tablename__ = 'positions'
 
@@ -47,4 +48,4 @@ class Employee(db.Model):
     vacancy_id = db.Column(db.Integer, db.ForeignKey('employees.id'), nullable=False)
     department_id = db.Column(db.Integer, db.ForeignKey('departments.id'), nullable=False)
     position_id = db.Column(db.Integer, db.ForeignKey('positions.id'), nullable=False)
-    vacancy = db.relationship('Vacancy', back_populates='employee')
+    vacancy = db.relationship('Vacancy', uselist=False, back_populates='employee')

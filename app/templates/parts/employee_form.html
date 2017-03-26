@@ -1,35 +1,35 @@
 {{ form.hidden_tag() }}
 <div class="form-group required">
     {{ form.name.label(class="control-label") }}
-    {{ form.name(class="form-control") }}
+    {{ form.name(class="form-control", required="") }}
 </div>
 <div class="form-group required">
     {{ form.surname.label(class="control-label") }}
-    {{ form.surname(class="form-control") }}
+    {{ form.surname(class="form-control", required="") }}
 </div>
 <div class="form-group required">
     {{ form.position_id.label(class="control-label") }}
-    {{ form.position_id(class="form-control") }}
+    {{ form.position_id(class="form-control", required="") }}
 </div>
 <div class="form-group required">
     {{ form.email.label(class="control-label") }}
-    {{ form.email(class="form-control") }}
+    {{ form.email(class="form-control", required="") }}
 </div>
 <div class="form-group required">
     {{ form.phone_number.label(class="control-label") }}
-    {{ form.phone_number(class="form-control") }}
+    {{ form.phone_number(class="form-control", required="") }}
 </div>
 <div class="form-group required">
-    {{ form.birth_date.label(class="control-label") }}
+    {{ form.birth_date.label(class="control-label", required="") }}
     {{ form.birth_date(class="form-control", value=date_to_str(form.birth_date.data).strip()) }}
 </div>
 <div class="form-group required">
     {{ form.department_id.label(class="control-label") }}
-    {{ form.department_id(class="form-control") }}
+    {{ form.department_id(class="form-control", required="") }}
 </div>
 <div class="form-group required">
     {{ form.start_date.label(class="control-label") }}
-    {{ form.start_date(class="form-control datepicker", value=date_to_str(form.start_date.data).strip()) }}
+    {{ form.start_date(class="form-control datepicker", required="", value=date_to_str(form.start_date.data).strip()) }}
 </div>
 <div class="checkbox">
     <label>

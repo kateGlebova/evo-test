@@ -1,18 +1,14 @@
-{% extends "base.html" %}
+{% extends "base/jumbotron.html" %}
 
 {% block title %} {{ position.name }} {% endblock %}
 
-{% block content %}
-    <div class="jumbotron">
-        <div class="container">
-            <h1>{{ position.name }} </h1>
+{% block jumbotron_content %}
+    <h1>{{ position.name }} </h1>
             {% if  position.description %}
                 <p> {{ position.description }}</p>
             {% endif %}
-        </div>
-    </div>
-    <div class="container">
+{% endblock %}
+
+{% block main_content %}
         {{ wtf.quick_form(form) }}
-{#        {{ modal('add_vacancy', 'Add vacancy: ', vacancy_form) }}#}
-    </div>
 {% endblock %}

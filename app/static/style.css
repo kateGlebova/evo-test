@@ -31,7 +31,6 @@ body {
     width: 100%;
     height: 100%;
     background-color: #2b2c3e;
-    color: #d7ddea;
     border: none;
     color: inherit;
 }
@@ -67,4 +66,12 @@ a:hover {
 .btn {
     background-color: #2b2c3e;
     color: #d7ddea;
+}
+
+.error {
+    margin-top: 10%;
+}
+
+.error_text {
+    padding-top: 5%;
 }

@@ -1,49 +1,57 @@
-{% extends "base.html" %}
+{% extends "base/jumbotron.html" %}
 
 {% block title %} {{ department.name }} {% endblock %}
 
-{% block content %}
-    <div class="jumbotron">
-        <div class="container">
-            <h1>{{ department.name }}            </h1>
-            {% if  department.description %}
-                <p> {{ department.description }}
-                    <button class="btn btn-default" data-toggle="modal" data-target="#update_department">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-                </p>
-            {% endif %}
-        </div>
-    </div>
-    <div class="container">
+{% block jumbotron_content %}
 
-        {{ modal(
+    <h1>{{ department.name }}</h1>
+    {% if  department.description %}
+        <p> {{ department.description }}
+            <button class="btn btn-default" data-toggle="modal" data-target="#update_department">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+        </p>
+    {% endif %}
+
+{% endblock %}
+
+{% block main_content %}
+
+    {{ modal(
                 'add_vacancy',
                 'Add vacancy: ',
                 vacancy_form,
                 action= url_for('vacancies', department_id=department.id),
-                form_template='vacancy_form.html'
-        )}}
+                form_template='parts/vacancy_form.html'
+        ) }}
 
-        {{ modal('update_department', 'Update department:', department_form) }}
+    {{ modal('update_department', 'Update department:', department_form) }}
 
-        {% if vacancies  %}
-            <h2>Open vacancies <button class="btn btn-default" data-toggle="modal" data-target="#add_vacancy"><span class="glyphicon glyphicon-plus"></span></button></h2>
-            {% for vacancy in vacancies %}
-                <a href="{{ url_for('vacancy', department_id=vacancy.department_id, vacancy_id=vacancy.id) }}">
-                    {{ vacancy.position.name }}, {{ vacancy.publishment_date }}
-                </a>
-            {% endfor %}
-        {% else %}
-            <h2>No open vacancies <button class="btn btn-default" data-toggle="modal" data-target="#add_vacancy"><span class="glyphicon glyphicon-plus"></span></button></h2>
-        {% endif %}
-        {% if employees %}
-            <h2>Employees</h2>
-            {% for employee in employees %}
-                <a>{{ employee.name }} {{ employee.surname }}, {{ employee.position }}</a>
-            {% endfor %}
-        {% else %}
-            <h2>No employees</h2>
-        {% endif %}
-    </div>
+    {% if vacancies %}
+        <h2>Open vacancies
+            <button class="btn btn-default" data-toggle="modal" data-target="#add_vacancy"><span
+                    class="glyphicon glyphicon-plus"></span></button>
+        </h2>
+        {% for vacancy in vacancies %}
+            <a href="{{ url_for('vacancy', department_id=vacancy.department_id, vacancy_id=vacancy.id) }}">
+                {{ vacancy.position.name }}, {{ date_to_str(vacancy.publishment_date) }}
+            </a>
+        {% endfor %}
+    {% else %}
+        <h2>No open vacancies
+            <button class="btn btn-default" data-toggle="modal" data-target="#add_vacancy"><span
+                    class="glyphicon glyphicon-plus"></span></button>
+        </h2>
+    {% endif %}
+    {% if employees %}
+        <h2>Employees</h2>
+        {% for employee in employees %}
+            <a href="{{ url_for('employee', department_id=employee.department.id, employee_id=employee.id) }}">
+                {{ employee.name }} {{ employee.surname }}, {{ employee.position.name }}
+            </a>
+        {% endfor %}
+    {% else %}
+        <h2>No employees</h2>
+    {% endif %}
+
 {% endblock %}

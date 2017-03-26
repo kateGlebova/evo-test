@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from flask import flash
+
 from app.models import Position, Department
 
 
@@ -11,7 +13,7 @@ def get_all_departments():
     return [(department.id, department.name) for department in Department.query.all()]
 
 
-def parse_date(date, format):
+def str_to_date(date, format='%d/%m/%Y'):
     try:
         parsed_date = datetime.strptime(date, format).date()
     except ValueError:
@@ -19,5 +21,10 @@ def parse_date(date, format):
     return parsed_date
 
 
-def parse_datepicker_date(date):
-    return parse_date(date, '%m/%d/%Y')
+def flash_errors(form):
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash("%s: %s" % (
+                getattr(form, field).label.text,
+                error
+            ))

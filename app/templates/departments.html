@@ -1,34 +1,37 @@
-{% extends "base.html" %}
+{% extends "base/page_header.html" %}
 
 {% block title %} Departments {% endblock %}
 
-{% block content %}
-    <div class="container">
-        <div class="page-header">
-            <h1>Departments</h1>
-        </div>
-        <div class="row position_btn_row text-center">
-            <a class="btn btn-default" href="{{ url_for('positions') }}">Positions</a>
-        </div>
-        <div class="row">
-            <div class="department col-md-2">
-                <button data-toggle="modal" data-target="#add_department">
-                    <div class="department_inner">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </div>
-                </button>
-            </div>
-            {% for department in departments %}
-                <div class="department col-md-2">
-                    <a href="{{ url_for('department', department_id=department.id) }}">
-                        <div class="department_inner">
-                            {{ department.name }}
-                        </div>
-                    </a>
-                </div>
-            {% endfor %}
-        </div>
+{% block page_header %}
 
-        {{ modal('add_department', 'Add department: ', form) }}
+    <h1>Departments</h1>
+
+{% endblock %}
+
+{% block main_content %}
+
+    <div class="row position_btn_row text-center">
+        <a class="btn btn-default" href="{{ url_for('positions') }}">Positions</a>
     </div>
+    <div class="row">
+        <div class="department col-md-2">
+            <button data-toggle="modal" data-target="#add_department">
+                <div class="department_inner">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </div>
+            </button>
+        </div>
+        {% for department in departments %}
+            <div class="department col-md-2">
+                <a href="{{ url_for('department', department_id=department.id) }}">
+                    <div class="department_inner">
+                        {{ department.name }}
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    {{ modal('add_department', 'Add department: ', form) }}
+
 {% endblock %}

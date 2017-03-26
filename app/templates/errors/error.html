@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1>{% block page_header %} {% endblock %}</h1>
+        </div>
+        <div class="row error">
+            <div class="col-md-6 text-center">
+                <img class="img-responsive" src="{% block img_src %} {% endblock %}" alt=" Sorry!">
+            </div>
+            <div class="col-md-6 error_text">
+                {% block error_text %} {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

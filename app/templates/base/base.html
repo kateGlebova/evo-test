@@ -1,7 +1,7 @@
 {% extends "bootstrap/base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% macro modal(id, title, form, action='', form_template='quick_form.html') %}
+{% macro modal(id, title, form, action='', form_template='parts/quick_form.html') %}
     <div class="modal fade" tabindex="-1" role="dialog" id="{{ id }}">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -48,3 +48,4 @@
         })
     </script>
 {% endblock %}
+

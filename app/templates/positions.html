@@ -1,29 +1,31 @@
-{% extends "base.html" %}
+{% extends "base/page_header.html" %}
 
 {% block title %} Positions {% endblock %}
 
-{% block content %}
-    <div class="container">
-        <div class="page-header">
-            <h1>Positions</h1>
-        </div>
-        <div class="row">
-            <button class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-target="#add_position">
-                <span class="glyphicon glyphicon-plus"></span> Add
-            </button>
-        </div>
-        <div class="row">
-            {% if positions %}
-                {% for position in positions %}
-                    <p>
-                        <a href="{{ url_for('position', position_id=position.id) }}">
-                            {{ position.name }}
-                        </a>
-                    </p>
-                {% endfor %}
-            {% endif %}
-        </div>
+{% block page_header %}
 
-        {{ modal('add_position', 'Add position: ', form) }}
+    <h1>Positions</h1>
+
+{% endblock %}
+
+{% block main_content %}
+
+    <div class="row">
+        <button class="btn btn-default" aria-label="Left Align" data-toggle="modal" data-target="#add_position">
+            <span class="glyphicon glyphicon-plus"></span> Add
+        </button>
     </div>
+    <div class="row">
+        {% if positions %}
+            {% for position in positions %}
+                <p>
+                    <a href="{{ url_for('position', position_id=position.id) }}">
+                        {{ position.name }}
+                    </a>
+                </p>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    {{ modal('add_position', 'Add position: ', form) }}
 {% endblock %}

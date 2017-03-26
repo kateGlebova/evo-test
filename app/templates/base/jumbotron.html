@@ -1,0 +1,16 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+
+    <div class="jumbotron">
+        <div class="container">
+            {% block jumbotron_content %}{% endblock %}
+        </div>
+    </div>
+
+    <div class="container">
+        {% include 'parts/flash.html' %}
+        {% block main_content %} {% endblock %}
+    </div>
+
+{% endblock %}

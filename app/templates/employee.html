@@ -1,0 +1,35 @@
+{% extends "base/jumbotron.html" %}
+
+{% block title %} {{ employee.name }} {{ employee.surname }}{% endblock %}
+
+{% block jumbotron_content %}
+
+    <h1>{{ employee.name }} {{ employee.surname }}</h1>
+    <p> {{ employee.position.name }}, {{ employee.department.name }}
+        {% if employee.is_director %}
+            (Director)
+        {% endif %}
+        <button class="btn btn-default" data-toggle="modal" data-target="#update_employee">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </button>
+    </p>
+
+{% endblock %}
+
+{% block main_content %}
+
+    {{ modal(
+            'update_employee',
+            'Update employee info:',
+            employee_form,
+            form_template='parts/employee_form.html'
+        ) }}
+    <h2>Hired {{ date_to_str(employee.vacancy.closing_date) }}</h2>
+    <h3>Email: </h3>
+    <p>{{ employee.email }}</p>
+    <h3>Phone number: </h3>
+    <p>{{ employee.phone_number }}</p>
+    <h3>Birth date: </h3>
+    <p>{{ date_to_str(employee.birth_date) }}</p>
+
+{% endblock %}
