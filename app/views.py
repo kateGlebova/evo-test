@@ -2,7 +2,7 @@ from flask import redirect, render_template, url_for, abort, request
 
 from app import app, db
 from app.forms import DepartmentForm, VacancyForm, PositionForm, EmployeeForm
-from app.helpers import flash_errors
+from app.helpers import flash_errors, update_position, update_director
 from app.models import Department, Vacancy, Position, Employee, WorkHistory
 
 
@@ -110,9 +110,7 @@ def employees(department_id, vacancy_id):
         )
 
         if form.director.data:
-            director = Employee.query.filter_by(department_id=department_id, is_director=True)
-            director.is_director = False
-            employee.is_director = True
+            update_director(department_id, employee, True)
         db.session.add(employee)
 
         vacancy.is_open = False
@@ -121,12 +119,11 @@ def employees(department_id, vacancy_id):
 
         db.session.commit()
 
-        history_entry = WorkHistory(employee_id=employee.id, position_id=employee.position_id)
-        db.session.add(history_entry)
+        update_position(employee, form.position_id.data, form.department_id.data, form.start_date.data)
         db.session.commit()
 
     flash_errors(form)
-    return redirect(url_for('vacancy', department_id=department_id, vacancy_id=vacancy_id))
+    return redirect(url_for('department', department_id=department_id))
 
 
 @app.route('/<department_id>/employees/<employee_id>/', methods=['GET', 'POST'])
@@ -135,15 +132,23 @@ def employee(department_id, employee_id):
     if not employee:
         abort(404)
 
+
+
     employee_form = EmployeeForm(obj=employee, start_date=employee.vacancy.closing_date)
 
     if employee_form.validate_on_submit():
+        if employee.position_id != employee_form.position_id.data or employee.department_id != employee_form.department_id.data:
+            update_position(
+                employee,
+                employee_form.position_id.data,
+                employee_form.department_id.data,
+                employee_form.start_date.data
+            )
+
+        if employee.is_director != employee_form.director.data:
+            update_director(department_id, employee, employee_form.director.data)
+
         employee_form.populate_obj(employee)
-        employee.vacancy.closing_date = employee_form.start_date.data
-
-        history_entry = WorkHistory(employee_id=employee.id, position_id=employee.position_id)
-        db.session.add(history_entry)
-
         db.session.commit()
         return redirect(url_for('employee', department_id=employee.department_id, employee_id=employee.id))
 
@@ -159,7 +164,7 @@ def fire(department_id, employee_id):
 
     employee.is_fired = True
     db.session.commit()
-    return redirect(url_for('employee', department_id=department_id, employee_id=employee_id))
+    return redirect(url_for('department', department_id=department_id))
 
 
 @app.route('/positions/', methods=['GET', 'POST'])

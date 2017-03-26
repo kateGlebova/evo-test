@@ -17,13 +17,17 @@
     </div>
     <div class="row">
         {% if positions %}
+            <table class="table table-hover">
             {% for position in positions %}
-                <p>
+                <tr>
+                <td>
                     <a href="{{ url_for('position', position_id=position.id) }}">
                         {{ position.name }}
                     </a>
-                </p>
+                </td>
+                </tr>
             {% endfor %}
+            </table>
         {% endif %}
     </div>
 

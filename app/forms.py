@@ -15,7 +15,7 @@ class DepartmentForm(FlaskForm):
 
 
 class VacancyForm(FlaskForm):
-    position_id = SelectField('Position', coerce=int, choices=get_all_positions(), validators=[DataRequired()])
+    position_id = SelectField('Position', coerce=int, validators=[DataRequired()])
     publishment_date = StringField('Publishment date', description='%d/%m/%y', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
@@ -24,7 +24,7 @@ class VacancyForm(FlaskForm):
         self.position_id.choices = get_all_positions()
 
     def validate(self):
-        publishment_date = str_to_date(self.publishment_date.data, self.publishment_date.description)
+        publishment_date = str_to_date(self.publishment_date.data)
         if not publishment_date:
             publishment_date = datetime.date(datetime.today())
         self.publishment_date.data = publishment_date

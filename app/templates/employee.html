@@ -12,6 +12,9 @@
         <button class="btn btn-default" data-toggle="modal" data-target="#update_employee">
             <span class="glyphicon glyphicon-pencil"></span>
         </button>
+        <a class="btn btn-default" href="{{ url_for('fire', department_id=employee.department.id, employee_id=employee.id) }}">
+            Fire
+        </a>
     </p>
 
 {% endblock %}
@@ -24,12 +27,26 @@
             employee_form,
             form_template='parts/employee_form.html'
         ) }}
-    <h2>Hired {{ date_to_str(employee.vacancy.closing_date) }}</h2>
-    <h3>Email: </h3>
-    <p>{{ employee.email }}</p>
-    <h3>Phone number: </h3>
-    <p>{{ employee.phone_number }}</p>
-    <h3>Birth date: </h3>
-    <p>{{ date_to_str(employee.birth_date) }}</p>
+    <h2>Hired <small>{{ date_to_str(employee.vacancy.closing_date) }}</small></h2>
+    <h3>Email: <small>{{ employee.email }}</small></h3>
+    <h3>Phone number: <small>{{ employee.phone_number }}</small></h3>
+    <h3>Birth date: <small>{{ date_to_str(employee.birth_date) }}</small></h3>
+    <h3>Work history</h3>
+    <table class="table">
+        <tr>
+            <th>Position</th>
+            <th>Department</th>
+            <th>Start</th>
+            <th>End</th>
+        </tr>
+        {% for job in employee.history %}
+            <tr>
+                <td>{{ job.position.name }}</td>
+                <td>{{ job.department.name }}</td>
+                <td>{{ date_to_str(job.start) }}</td>
+                <td>{{ date_to_str(job.end) }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 
 {% endblock %}

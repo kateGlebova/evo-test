@@ -75,3 +75,23 @@ a:hover {
 .error_text {
     padding-top: 5%;
 }
+
+ul {
+    background-color: #2b2c3e;
+    color: #d7ddea;
+}
+
+ul li a {
+    color: inherit;
+}
+
+ul li a:hover {
+    background-color: #d7ddea;
+    color: #2b2c3e;
+}
+
+td a {
+    display: block;
+    width: 100%;
+    height:100%;
+}

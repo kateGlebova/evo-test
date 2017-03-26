@@ -2,7 +2,8 @@ from datetime import datetime
 
 from flask import flash
 
-from app.models import Position, Department
+from app import db
+from app.models import Position, Department, WorkHistory, Employee
 
 
 def get_all_positions():
@@ -28,3 +29,31 @@ def flash_errors(form):
                 getattr(form, field).label.text,
                 error
             ))
+
+
+def update_position(employee, new_position_id, new_department_id, start_date):
+    old_position = WorkHistory.query.filter_by(
+        employee_id=employee.id,
+        position_id=employee.position_id,
+        department_id=employee.department_id
+    ).first()
+    if old_position:
+        old_position.end = start_date
+
+    new_position = WorkHistory(
+        employee_id=employee.id,
+        position_id=new_position_id,
+        department_id=new_department_id,
+        start=start_date
+    )
+    db.session.add(new_position)
+
+
+def update_director(department_id, employee, new_director):
+    if new_director:
+        director = Employee.query.filter_by(department_id=department_id, is_director=True).first()
+        if director:
+            director.is_director = False
+        employee.is_director = True
+    else:
+        employee.is_director = False

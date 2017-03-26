@@ -32,15 +32,24 @@
             <button class="btn btn-default" data-toggle="modal" data-target="#add_vacancy"><span
                     class="glyphicon glyphicon-plus"></span></button>
         </h2>
-        <ul>
+        <table class="table table-hover">
+            <tr>
+                <th>Position</th>
+                <th>Published</th>
+            </tr>
             {% for vacancy in vacancies %}
-                <li>
-                    <a href="{{ url_for('vacancy', department_id=vacancy.department_id, vacancy_id=vacancy.id) }}">
-                        {{ vacancy.position.name }}, {{ date_to_str(vacancy.publishment_date) }}
-                    </a>
-                </li>
+                <tr>
+                    <td>
+                        <a href="{{ url_for('vacancy', department_id=vacancy.department_id, vacancy_id=vacancy.id) }}">
+                            {{ vacancy.position.name }}
+                        </a>
+                    </td>
+                    <td>
+                        {{ date_to_str(vacancy.publishment_date) }}
+                    </td>
+                </tr>
             {% endfor %}
-        </ul>
+        </table>
     {% else %}
         <h2>No open vacancies
             <button class="btn btn-default" data-toggle="modal" data-target="#add_vacancy"><span
@@ -49,15 +58,29 @@
     {% endif %}
     {% if employees %}
         <h2>Employees</h2>
-        <ul>
-        {% for employee in employees %}
-            <li>
-                <a href="{{ url_for('employee', department_id=employee.department.id, employee_id=employee.id) }}">
-                    {{ employee.name }} {{ employee.surname }}, {{ employee.position.name }}
-                </a>
-            </li>
-        {% endfor %}
-        </ul>
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Position
+                </th>
+            </tr>
+            {% for employee in employees %}
+                <tr>
+                    <td>
+                        <a href="{{ url_for('employee', department_id=employee.department.id, employee_id=employee.id) }}">
+                        {{ employee.name }} {{ employee.surname }}
+                    </a>
+                    </td>
+                    <td>
+                        {{ employee.position.name }}
+                    </td>
+
+                </tr>
+            {% endfor %}
+        </table>
     {% else %}
         <h2>No employees</h2>
     {% endif %}
