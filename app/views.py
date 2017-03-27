@@ -192,7 +192,7 @@ def position(position_id):
     if form.validate_on_submit():
         form.populate_obj(position)
         db.session.commit()
-        return redirect('position', position_id=position.id)
+        return redirect(url_for('position', position_id=position.id))
 
     flash_errors(form)
     return render_template('position.html', position=position, form=form)
