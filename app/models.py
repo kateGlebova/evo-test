@@ -47,7 +47,7 @@ class Employee(db.Model):
     birth_date = db.Column(db.Date, nullable=False)
     is_director = db.Column(db.Boolean, default=False)
     is_fired = db.Column(db.Boolean, default=False)
-    vacancy_id = db.Column(db.Integer, db.ForeignKey('vacancies.id'), nullable=False)
+    vacancy_id = db.Column(db.Integer, db.ForeignKey('employees.id'), nullable=False)
     department_id = db.Column(db.Integer, db.ForeignKey('departments.id'), nullable=False)
     position_id = db.Column(db.Integer, db.ForeignKey('positions.id'), nullable=False)
     vacancy = db.relationship('Vacancy',  uselist=False, back_populates='employee')
