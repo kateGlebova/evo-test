@@ -106,7 +106,7 @@ def employees(department_id, vacancy_id):
             phone_number=form.phone_number.data,
             birth_date=form.birth_date.data,
             department_id=form.department_id.data,
-            vacancy_id=vacancy_id
+            vacancy=vacancy
         )
 
         if form.director.data:

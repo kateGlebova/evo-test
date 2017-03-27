@@ -1,4 +1,4 @@
-{% extends 'error.html' %}
+{% extends 'errors/error.html' %}
 
 {% block title %} 500 Internal Server Error {% endblock %}
 
@@ -6,7 +6,7 @@
 {% block img_src %} {{ url_for('static', filename='sorry.jpg') }} {% endblock %}
 {% block error_text %}
     <p>
-        Oops, something went wro.
+        Oops, something went wrong.
     </p>
     <p>
         If you entered the URL manually please check your spelling and try again.
